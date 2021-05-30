@@ -81,15 +81,15 @@ jobs:
         
     - name: 自定义配置文件Lienol
       env:
-        CONFIG_FILE: 'ghl-r-001.config'
+        CONFIG_FILE: 'Lienol.config'
       run: |
-        [ -e $CONFIG_FILE ] && cp -f $CONFIG_FILE openwrt/.config
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x ./customize.sh && ./customize.sh
         cd openwrt && rm -rf package/litte/AdGuardHome
         rm -rf package/litte/luci-app-adguardhome
-        cp -f package/litte/zzz-default-settings package/default-settings/files/zzz-default-settings
-        cp -f package/litte/banner package/base-files/files/etc/banner
-        make defconfig
+        cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
+        cp -f package/litte/commit/banner package/base-files/files/etc/banner
+        cp -f package//litte/commit/Lienoldiffconfig .config && make defconfig
         ./scripts/feeds update -a
         ./scripts/feeds install -a
 
