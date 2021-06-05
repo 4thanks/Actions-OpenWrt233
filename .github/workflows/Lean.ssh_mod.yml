@@ -88,8 +88,11 @@ jobs:
         git pull && ./scripts/feeds update -a
         ./scripts/feeds install -a
 
-- name: SSH connection to Actions
-      uses: P3TERX/debugger-action@main
+    - name: SSH connection to Actions
+      uses: P3TERX/ssh2actions@v1.0.0
+      env:
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
     - name: 下载包文件
       working-directory: ./openwrt
